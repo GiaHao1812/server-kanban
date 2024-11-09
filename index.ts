@@ -1,15 +1,18 @@
-import express from 'express'
+import cors from "cors"
 import dotenv from 'dotenv'
+import express from 'express'
 import mongoose from 'mongoose';
 import userRouter from './src/routers/userRouters'
+
 dotenv.config()
 
 
-const PORT = process.env.PORT  || 3001;
+const PORT = process.env.PORT  || 3002;
 const dbURL = `mongodb+srv://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@cluster0.rohbi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 const app = express();
 
-
+app.use(express.json());
+app.use(cors());
 app.use('/auth',userRouter);
 
 const connectDB = async () =>{
